@@ -1,4 +1,5 @@
 <?php
+
 $params = array_merge(
 	require __DIR__ . '/../../common/config/params.php',
 	require __DIR__ . '/../../common/config/params-local.php',
@@ -18,7 +19,7 @@ return [
 			'csrfCookie' => [
 				'httpOnly' => true,
 				'path'     => '/admin',
-			],
+			]
 		],
 		'user'         => [
 			'identityClass'   => 'common\models\User',
@@ -47,15 +48,17 @@ return [
 		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
-		],
+		],/*
 		'urlManager'   => [
-			'enablePrettyUrl' => true,
-			'showScriptName'  => false,
-			'rules'           => [
-				'/'                              => 'site/index',
-				'<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
-			],
-		],
+			'enablePrettyUrl'     => true,
+			'showScriptName'      => false,
+			'suffix'              => '/',
+			'rules'               => [
+				''                              => 'site/index',
+				'<controller:\w+>'              => '<controller>/index',
+				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+			]
+		],*/
 	],
 	'params'              => $params,
 ];

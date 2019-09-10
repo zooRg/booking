@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string $preview
+ * @property int $count
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -28,6 +29,7 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'preview'], 'string'],
+            [['count'], 'integer'],
         ];
     }
 
@@ -38,8 +40,9 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'preview' => 'Preview',
+            'name' => 'Автор книги',
+            'preview' => 'Описание книги',
+            'count' => 'Количество книг',
         ];
     }
 }
