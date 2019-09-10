@@ -14,6 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id')->textInput() ?>
 
+    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'preview')->textarea(['rows' => 6]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

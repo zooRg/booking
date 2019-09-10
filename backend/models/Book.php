@@ -8,6 +8,8 @@ use Yii;
  * This is the model class for table "book".
  *
  * @property int $id
+ * @property string $name
+ * @property string $preview
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -24,7 +26,9 @@ class Book extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [];
+        return [
+            [['name', 'preview'], 'string'],
+        ];
     }
 
     /**
@@ -34,6 +38,8 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'name' => 'Name',
+            'preview' => 'Preview',
         ];
     }
 }

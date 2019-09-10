@@ -18,6 +18,7 @@ class BookSearch extends Book
     {
         return [
             [['id'], 'integer'],
+            [['name', 'preview'], 'safe'],
         ];
     }
 
@@ -59,6 +60,9 @@ class BookSearch extends Book
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'preview', $this->preview]);
 
         return $dataProvider;
     }
