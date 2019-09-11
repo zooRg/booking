@@ -1,14 +1,26 @@
-Options +FollowSymLinks
-IndexIgnore */*
-RewriteEngine on
-
-RewriteBase /
-
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/(admin)/$
-RewriteRule ^www(.*[^/])$ $1/ [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+</IfModule>
+ 
+<IfModule mod_rewrite.c>
+    # если /admin, то в backend
+    RewriteCond %{REQUEST_URI} ^/(admin)
+    RewriteRule ^admin/assets/(.*)$ www/admin/assets/$1 [L]
+    RewriteRule ^admin/css/(.*)$ www/admin/css/$1 [L]
+    RewriteRule ^admin/js/(.*)$ www/admin/js/$1 [L]
+    RewriteCond %{REQUEST_URI} !^/www/admin/(assets|js|css|js)/
+    RewriteCond %{REQUEST_URI} ^/(admin)
+    RewriteRule ^.*$ www/admin/index.php [L]
+    RewriteCond %{REQUEST_URI} ^/(assets|css|js|images)
+    RewriteRule ^assets/(.*)$ www/assets/$1 [L]
+    RewriteRule ^css/(.*)$ www/css/$1 [L]
+    RewriteRule ^js/(.*)$ www/js/$1 [L]
+    RewriteRule ^images/(.*)$ www/images/$1 [L]
+    RewriteRule ^(.*)$ www/$1 [L]
+    RewriteCond %{REQUEST_URI} !^/(www|www/admin)/(assets|css|js)/
+    RewriteCond %{REQUEST_URI} !index.php
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.*$ www/index.php
+</IfModule>

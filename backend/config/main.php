@@ -12,30 +12,28 @@ return [
 	'basePath'            => dirname(__DIR__),
 	'controllerNamespace' => 'backend\controllers',
 	'bootstrap'           => ['log'],
-	'modules'             => [],
+	'modules'             => [
+		'gii' => [
+			'class'      => 'yii\gii\Module',
+			'allowedIPs' => ['*'],
+		],
+	],
 	'components'          => [
 		'request'      => [
-			'csrfParam'  => '_csrf-backend',
-			'csrfCookie' => [
-				'httpOnly' => true,
-				'path'     => '/admin',
-			]
+			'csrfParam' => '_csrf-backend',
+			'baseUrl'   => '/admin',
 		],
 		'user'         => [
 			'identityClass'   => 'common\models\User',
 			'enableAutoLogin' => true,
 			'identityCookie'  => [
 				'name'     => '_identity-backend',
-				'path'     => '/admin',
 				'httpOnly' => true,
 			],
 		],
 		'session'      => [
 			// this is the name of the session cookie used for login on the backend
-			'name'         => 'advanced-backend',
-			'cookieParams' => [
-				'path' => '/admin',
-			],
+			'name' => 'advanced-backend',
 		],
 		'log'          => [
 			'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -48,17 +46,20 @@ return [
 		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',
-		],/*
+		],
 		'urlManager'   => [
-			'enablePrettyUrl'     => true,
-			'showScriptName'      => false,
-			'suffix'              => '/',
-			'rules'               => [
-				''                              => 'site/index',
-				'<controller:\w+>'              => '<controller>/index',
-				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-			]
-		],*/
+			'class'           => 'yii\web\UrlManager',
+			'enablePrettyUrl' => true,
+			'showScriptName'  => false,
+			'suffix'          => '/',
+			'baseUrl'         => '/admin',
+			'rules'           => [
+				''                               => 'book/index',
+				'/book/create/'                  => 'book/create',
+				'/login/'                        => 'site/login',
+				'<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+			],
+		],
 	],
 	'params'              => $params,
 ];
