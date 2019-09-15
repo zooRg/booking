@@ -25,6 +25,10 @@ DIRECTORY STRUCTURE
 -------------------
 
 ```
+api
+    config/              contains shared configurations
+    controllers/         contains Web controller classes
+    models/              contains backend-specific model classes
 common
     config/              contains shared configurations
     mail/                contains view files for e-mails
